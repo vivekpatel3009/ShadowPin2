@@ -1,0 +1,111 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-header-text">{{pageTitle}}</h5>
+        
+      </div>
+      <div class="card-body ">
+        <form role="form" [formGroup]="lookupForm" (ngSubmit)="onSubmitClick(lookupForm.value)" novalidate>
+          <div class="row">
+            
+            <input type="hidden" [(ngModel)]="lookup.Id" formControlName="Id">
+            <div class="form-group  col-sm-6">
+              <label class="col-sm-3 col-form-label">Name</label>
+              <div class="col-sm-9">
+                  
+                <input type="text" class="form-control" 
+                [(ngModel)]="lookup.Name" 
+                formControlName="Name" 
+                placeholder="Name"
+                [ngClass]="{'is-invalid': submited && lookupForm.controls.Name.errors}"
+                >
+                <div class="messages text-danger" *ngIf="lookupForm.hasError('required', ['Name']) &&submited">
+                  Lookup name is required.
+              </div>
+              </div>
+            </div>
+            <div class="form-group col-sm-6">
+              <label class="col-sm-3 col-form-label">Lookup Type</label>
+              <div class="col-sm-9">
+                <div [ngClass]="{'is-invalid-option': submited && lookupForm.controls.LookupType.errors}">
+                <ngx-select [items]="DDList" 
+                  optionValueField="item_text" 
+                  optionTextField="item_text" 
+                  placeholder="Select Lookup Type"
+                  [(ngModel)]="lookup.LookupType"
+                  formControlName="LookupType">
+                </ngx-select>
+              </div>
+              <div class="messages text-danger" *ngIf="lookupForm.hasError('required', ['LookupType']) &&submited">
+                Lookup type is required.
+            </div>
+            </div>
+              
+            </div>
+            <div class="form-group  col-sm-6">
+              <label class="col-sm-3 col-form-label">Full Name</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="Full Name"  [(ngModel)]="lookup.FullName" 
+                formControlName="FullName" [ngClass]="{'is-invalid': submited && lookupForm.controls.FullName.errors}">
+                <div class="messages text-danger" *ngIf="lookupForm.hasError('required', ['FullName']) &&submited">
+                  Full Name  is required.
+              </div>
+              </div>
+            </div>
+            <div class="form-group  col-sm-6">
+              <label class="col-sm-3 col-form-label">Display Name</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="Display Name" 
+                [(ngModel)]="lookup.DisplayName" 
+                formControlName="DisplayName" 
+                [ngClass]="{'is-invalid': submited && lookupForm.controls.DisplayName.errors}">
+                <div class="messages text-danger" *ngIf="lookupForm.hasError('required', ['DisplayName']) &&submited">
+                  Display Name  is required.
+              </div>
+              </div>
+            </div>
+            <div class="form-group  col-sm-6">
+              <label class="col-sm-3 col-form-label">Display Ordering</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="Display Ordering"
+                [(ngModel)]="lookup.DisplayOrdering" 
+                formControlName="DisplayOrdering" 
+                [ngClass]="{'is-invalid': submited && lookupForm.controls.DisplayOrdering.errors}">
+                <div class="messages text-danger" *ngIf="lookupForm.hasError('required', ['DisplayOrdering']) &&submited">
+                  Display Ordering  is required.
+              </div>
+              </div>
+            </div>
+            <div class="form-group col-sm-6">
+              <label class="col-sm-3 col-form-label">Status</label>
+              <div class="col-sm-9">
+                <div class="form-radio">
+                  <div class="radio radio-inline">
+                    <label>
+                      <input type="radio" name="Status" formControlName="IsActive" [(ngModel)]="lookup.IsActive" [value]="true" [checked]="lookup.IsActive==true">
+                      <i class="helper"></i>
+                      Active
+                    </label>
+                  </div>
+                  <div class="radio radio-inline">
+                    <label>
+                      <input type="radio" name="Status" formControlName="IsActive" [(ngModel)]="lookup.IsActive" [value]="false" [checked]="lookup.IsActive!=true">
+                      <i class="helper"></i>
+                      In active
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row" style="float: right;padding: 15px;">
+              <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+        </form>
+       
+      </div>
+      <!-- end of card-body -->
+    </div>
+  </div>
+</div>
